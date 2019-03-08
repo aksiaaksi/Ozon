@@ -23,20 +23,22 @@ def list_books(container, page, page_size):
 def search_books(container, search):  # search - строка поиска
     search_lowercased = search.strip().lower()  # 1. search.strip() 2. (результат search.strip()).lower()
     result = []
-    for book in container:
-        if search_lowercased == '':
-            break
-        if search_lowercased in book['title'].lower():
-            result.append(book)
-            continue  # не даёт идти дальше на 30 строку
 
-        if search_lowercased in book['author'].lower():
-            result.append(book)
-            continue  # пока не нужно, но на будущее пригодиться, если будем добавлять новые возможности
+    if search_lowercased != '':
 
-        for i in book['hashtag']:
-            if search_lowercased == i.lower():
+        for book in container:
+
+            if search_lowercased in book['title'].lower():
                 result.append(book)
-                continue
+                continue  # не даёт идти дальше на 30 строку
+
+            if search_lowercased in book['author'].lower():
+                result.append(book)
+                continue  # пока не нужно, но на будущее пригодиться, если будем добавлять новые возможности
+
+            for i in book['hashtag']:
+                if search_lowercased == i.lower():
+                    result.append(book)
+                    continue
 
     return result
