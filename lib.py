@@ -35,7 +35,7 @@ def search_books(container, search):  # search - строка поиска
             continue  # пока не нужно, но на будущее пригодиться, если будем добавлять новые возможности
 
         for i in book['hashtag']:
-            if search_lowercased in i.lower():
+            if search_lowercased == i.lower():
                 result.append(book)
                 continue
 
